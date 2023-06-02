@@ -26,6 +26,9 @@ $ yarn run start:prod
 
 #build db
 $ docker-compose up -d
+
+#Build db with seed data
+$ localhost:300/api/v2/seed
 ```
 
 ## Test
