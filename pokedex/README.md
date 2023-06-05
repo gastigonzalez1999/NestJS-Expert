@@ -27,8 +27,18 @@ $ yarn run start:prod
 #build db
 $ docker-compose up -d
 
+#Clone .env.template and rename to .env
+
 #Build db with seed data
 $ localhost:300/api/v2/seed
+```
+
+# Production Build
+1. Create .env.prod
+2. Fill it with env vars
+3. Build the image 
+```
+docker-compose -f docker-compose.prod.yaml --env-file .env.prod up --build
 ```
 
 ## Test
