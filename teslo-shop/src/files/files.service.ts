@@ -8,6 +8,7 @@ export class FilesService {
   constructor(
     private readonly configService: ConfigService,
   ) {}
+
   UploadedFile(file: Express.Multer.File) {
     if (!file)
       throw new BadRequestException('Make sure your sending a file');

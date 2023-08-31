@@ -7,6 +7,7 @@ export class SeedService {
   constructor(
     private readonly productsService: ProductsService,
   ) {}
+
   async runSeed() {
     await this.insertNewProducts();
     return `Seed executed`;
