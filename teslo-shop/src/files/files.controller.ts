@@ -24,9 +24,9 @@ export class FilesController {
   }
 
   @Post('product')
-  @UseInterceptors(FileInterceptor('file', { 
-    fileFilter, 
-    //limits: { fileSize: 1000 } 
+  @UseInterceptors(FileInterceptor('file', {
+    fileFilter,
+    //limits: { fileSize: 1000 }
     storage: diskStorage({
       destination: './static/uploads',
       filename: fileNamer,
