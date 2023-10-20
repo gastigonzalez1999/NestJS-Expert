@@ -1,17 +1,20 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UploadedFile, UseInterceptors, Res } from '@nestjs/common';
-import { FilesService } from './files.service';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { fileFilter } from './helpers/file-filter';
-import { diskStorage } from 'multer';
-import { fileNamer } from './helpers/file-namer';
 import { Response } from 'express';
-import { ConfigService } from '@nestjs/config';
+import { diskStorage } from 'multer';
 
+import { FilesService } from './files.service';
+import { fileFilter } from './helpers/file-filter';
+import { fileNamer } from './helpers/file-namer';
+import { Product } from 'src/products/entities/product.entity';
+
+
+@ApiTags('Files')
 @Controller('files')
 export class FilesController {
   constructor(
     private readonly filesService: FilesService,
-    private readonly configService: ConfigService,
   ) {}
 
   @Get('product/:imageName')
