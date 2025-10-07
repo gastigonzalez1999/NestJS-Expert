@@ -24,7 +24,7 @@ export class ProductsService {
   async create(body: CreateProductDto, user: User) {
     try {
       const { images = [], ...productDetails } = body
-      
+
       const product = this.productRepository.create({
         ...productDetails,
         images: images.map(image => this.productImageRepository.create({ url: image })),
@@ -56,6 +56,7 @@ export class ProductsService {
       }));
     } catch (error) {
       this.handleExceptions(error);
+      console.log(error)
     }
   }
 
@@ -74,7 +75,7 @@ export class ProductsService {
           .leftJoinAndSelect('prod.images', 'prodImages')
           .getOne();
       }
-      
+
       if (!productById)
         throw new NotFoundException(`Product with ${term} was not found`);
 
@@ -116,9 +117,9 @@ export class ProductsService {
 
       await queryRunner.commitTransaction();
       await queryRunner.release();
-      
+
       //await this.productRepository.save(product);
-  
+
       return this.findOnePlain(id);
     } catch (error) {
       await queryRunner.rollbackTransaction();
@@ -139,7 +140,7 @@ export class ProductsService {
   private handleExceptions(error: any) {
     if (error.code === '23505')
       throw new BadRequestException(error.detail);
-    
+
     this.logger.error(error);
     throw new Error(error.detail);
   }
